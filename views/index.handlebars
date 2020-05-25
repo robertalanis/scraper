@@ -1,6 +1,30 @@
-<h1>Articles</h1>
+<div class="wrapper bg-light">
 
-{{#each articles}}
-    <h1>test</h1>
-    <h2>{{title}}</h2>  
-{{/each}}
+    <div class="jumbotron text-center bg-dark text-light">
+        <h1 class="display-4">Mongo Scraper: Houseplant Edition</h1>
+        <hr class="my-4">
+        <p class="lead ">This app scrapes articles from Better Homes &amp; Gardens</p>
+        <p class="lead">
+            <a class="btn btn-outline-success btn-lg" href="/scrape" role="button">Scrape New Articles</a>
+            <a class="btn btn-outline-success btn-lg" href="/delete" role="button">Clear Scraped Articles</a>
+        </p>
+    </div>
+
+    <div class="row mx-auto">
+        {{#each articles}}
+        <div class="article col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card border border-success">
+                <img class="card-img-top" src={{imgURL}} alt={{imgAltText}}>
+                <div class="card-body">
+                    <h4 class="card-title text-center">
+                        <a href={{articleURL}}>{{title}}</a>
+                    </h4>
+                    <a href="#" class="btn btn-block btn-outline-success">Save</a>
+                </div>
+
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+</div>
