@@ -19,12 +19,18 @@
                     <h4 class="card-title text-center">
                         <a href={{articleURL}}>{{title}}</a>
                     </h4>
-                    <a href="#" class="btn btn-block btn-outline-success">Save</a>
+                    <a id="{{_id}}" class="save-note btn btn-block btn-outline-success">Save Article</a>
                 </div>
 
             </div>
         </div>
         {{/each}}
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>New York Times Mongo Scraper</p>
+        </div>
+    </footer>
 
 </div>
