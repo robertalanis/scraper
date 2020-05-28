@@ -1,0 +1,42 @@
+<div class="wrapper bg-light">
+
+    <div class="jumbotron text-center bg-dark text-light">
+        <h1 class="display-4">Mongo Scraper: Houseplant Edition</h1>
+        <hr class="my-4">
+        <p class="lead ">This app scrapes articles from Better Homes &amp; Gardens</p>
+        <p class="lead">
+            <a class="btn btn-outline-success btn-lg" href="/" role="button">Home</a>
+        </p>
+    </div>
+
+    <div class="row mx-auto">
+        
+        {{#each articles}}
+        {{#if saved}}
+        <div class="article col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card border border-success">
+                <img class="card-img-top" src={{imgURL}} alt={{imgAltText}}>
+                <div class="card-body">
+                    <h4 class="card-title text-center">
+                        <a href={{articleURL}}>{{title}}</a>
+                    </h4>
+                    <div class="btn-group btn-block">
+                    <a id="{{_id}}" class="add-note btn btn-success">Add Note</a>
+                    <a id="{{_id}}" class="remove-article btn btn-outline-success">Remove Article</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+        
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Better Homes &amp; Gardens Mongo Scraper</p>
+        </div>
+    </footer>
+
+</div>

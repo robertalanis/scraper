@@ -6,12 +6,14 @@
         <p class="lead ">This app scrapes articles from Better Homes &amp; Gardens</p>
         <p class="lead">
             <a class="btn btn-outline-success btn-lg" href="/scrape" role="button">Scrape New Articles</a>
-            <a class="btn btn-outline-success btn-lg" href="/delete" role="button">Clear Scraped Articles</a>
+            <a class="btn btn-outline-success btn-lg" href="/viewsaved" role="button">View Saved Articles</a>
         </p>
     </div>
 
     <div class="row mx-auto">
+        
         {{#each articles}}
+        {{#unless saved}}
         <div class="article col-lg-3 col-md-4 col-sm-6 mb-4">
             <div class="card border border-success">
                 <img class="card-img-top" src={{imgURL}} alt={{imgAltText}}>
@@ -19,17 +21,19 @@
                     <h4 class="card-title text-center">
                         <a href={{articleURL}}>{{title}}</a>
                     </h4>
-                    <a id="{{_id}}" class="save-note btn btn-block btn-outline-success">Save Article</a>
+                    <a id="{{_id}}" class="save-article btn btn-block btn-outline-success">Save Article</a>
                 </div>
 
             </div>
         </div>
+        {{/unless}}
         {{/each}}
+        
     </div>
 
     <footer class="footer">
         <div class="container">
-            <p>New York Times Mongo Scraper</p>
+            <p>Better Homes &amp; Gardens Mongo Scraper</p>
         </div>
     </footer>
 
