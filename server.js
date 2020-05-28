@@ -2,7 +2,6 @@ var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
-var bodyParser = require("body-parser");
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
@@ -28,7 +27,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //setting up handlebars
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+
+const hbs = exphbs.create({
+	defaultLayout: "main",
+	//custom helpers
+	helpers:{
+		hash: function(string) {
+			return "#" + string.toString();
+		}
+	} 
+});
+
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 // Make public a static folder
@@ -106,6 +116,11 @@ app.get("/scrape", function (req, res) {
 				.children("a")
 				.children("div")
 				.attr("data-alt");
+			result.articleID = $(this)
+				.children(".category-page-item-image")
+				.children("a")
+				.children("div")
+				.attr("data-title");
 
 			// Create a new Article using the `result` object built from scraping
 			db.Article.create(result)
@@ -125,7 +140,7 @@ app.get("/scrape", function (req, res) {
 });
 
 app.get("/delete", function (req, res) {
-	db.Article.remove({}, function (err) {
+	db.Article.deleteMany({}, function (err) {
 		console.log("collection removed");
 	});
 });

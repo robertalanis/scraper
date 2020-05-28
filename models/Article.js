@@ -15,7 +15,7 @@ var ArticleSchema = new Schema({
 	articleURL: {
 		type: String,
 		required: true,
-    },
+	},
     // `photo` is required and of type String
 	imgURL: {
 		type: String,
@@ -30,7 +30,12 @@ var ArticleSchema = new Schema({
     saved: {
         type: Boolean,
         default: false
-    },
+	},
+	// `link` is required and of type String
+	articleID: {
+			type: String,
+			required: true,
+	},
 	// `note` is an object that stores a Note id
 	// The ref property links the ObjectId to the Note model
 	// This allows us to populate the Article with an associated Note
