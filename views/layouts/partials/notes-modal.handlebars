@@ -1,0 +1,44 @@
+<!--Modal-->
+<div class="modal fade" id={{articleID}} tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">{{title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{#if note}}
+                {{#each note}}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {{note.body}}
+                        <p class="previousNotes"> {{this.note.body}}</p>
+                        <!-- Button -->
+                        <button type="button" class="btn btn-primary deleteNote" data-note-id={{this._id}}
+                            data-article-id={{this.article}}>X</button>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>No notes for this article yet.</h4>
+                    </div>
+                </div>
+                {{/if}}
+                <form>
+                    <div class="form-group">
+                        <label for="note-body{{this.id}}" class="col-form-label">Note:</label>
+                        <textarea id="note-body{{this._id}}" class="form-control" placeholder="New Note"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="create-note btn btn-primary" data-id={{this._id}}>Save Note</button> </div>
+        </div>
+    </div>
+</div>
