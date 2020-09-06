@@ -1,7 +1,9 @@
 var express = require("express");
+const Handlebars = require('handlebars');
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 var path = require("path");
 
 // Our scraping tools
@@ -24,7 +26,7 @@ var app = express();
 app.use(logger("dev"));
 
 // Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //setting up handlebars
@@ -37,6 +39,7 @@ const hbs = exphbs.create({
 			return "#" + string.toString();
 		},
 	},
+	handlebars: allowInsecurePrototypeAccess(Handlebars),
 });
 
 app.engine("handlebars", hbs.engine);
@@ -60,7 +63,7 @@ mongoose.connect(MONGODB_URI, {
 //Main route to view all articles
 app.get("/", (req, res) => {
 	db.Article.find({})
-		.lean()
+		//.lean()
 		.then(function (dbArticle) {
 			// If we were able to successfully find Articles, send them back to the client
 			let hbsObject = {
@@ -76,7 +79,8 @@ app.get("/", (req, res) => {
 
 // Route to view saved articles
 app.get("/viewsaved", (req, res) => {
-	db.Article.find({"saved":"true"}).lean()
+	db.Article.find({"saved":"true"})
+	//.lean()
 		.populate("notes")
 		
 		.then(function (dbArticle) {

@@ -29,7 +29,8 @@ var ArticleSchema = new Schema({
     // `saved` is required and of type Boolean
     saved: {
         type: Boolean,
-        default: false
+		default: false,
+		required: true,
 	},
 	// `link` is required and of type String
 	articleID: {
@@ -40,7 +41,7 @@ var ArticleSchema = new Schema({
 	// The ref property links the ObjectId to the Note model
 	// This allows us to populate the Article with an associated Note
 	notes: {
-		type: Schema.Types.ObjectId,
+		type: Schema.Types.Mixed,
 		ref: "Note",
 	},
 });
